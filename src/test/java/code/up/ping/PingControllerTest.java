@@ -19,4 +19,11 @@ class PingControllerTest {
 
         assertEquals("pong", result);
     }
+
+    @Test
+    void shouldComplainIfUserDoesNotVisitPing() {
+        final String result = httpClient.retrieve("/pang").blockingFirst();
+
+        assertEquals("WRONG GAME!", result);
+    }
 }
