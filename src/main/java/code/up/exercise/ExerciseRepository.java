@@ -16,24 +16,20 @@ class ExerciseRepository {
     ExerciseRepository() {
         exercises.put(
             "test",
-            Exercise.builder()
-                .setId("test")
-                .setDuration(Duration.ofHours(2))
-                .setExerciseType(RUN)
-                .build()
+            new Exercise().setDuration(Duration.ofHours(2)).setExerciseType(RUN).setId("test")
         );
     }
 
     Exercise save(final Exercise exercise) {
         final Exercise toSave;
         if(exercise.getId() == null) {
-            toSave = exercise.cloned().setId(UUID.randomUUID().toString()).build();
+            toSave = exercise.cloned().setId(UUID.randomUUID().toString());
         }
         else {
-            toSave = exercise.cloned().build();
+            toSave = exercise.cloned();
         }
         exercises.put(toSave.getId(), toSave);
-        return toSave;
+        return toSave.cloned();
     }
 
     List<Exercise> findAll() {

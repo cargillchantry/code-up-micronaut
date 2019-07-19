@@ -1,11 +1,10 @@
 package code.up.exercise;
 
+import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
-
 import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,9 +28,8 @@ public class ExerciseController {
     }
 
     @Post("/exercises")
-    HttpResponse<ExerciseDto> save(@Body final ExerciseDto exercise) {
-        return HttpResponse.created(
-            exerciseRepository.save(new Exercise(exercise)).asDto()
-        );
+    HttpResponse<ExerciseDto> save(final HttpRequest<ExerciseDto> exercise) {
+        final Exercise savedExercise = exerciseRepository.save(new Exercise(exercise.getBody().get()));
+        return HttpResponse.created(savedExercise.asDto(), exercise.getUri());
     }
 }
