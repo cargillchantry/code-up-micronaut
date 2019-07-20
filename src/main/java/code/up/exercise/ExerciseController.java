@@ -28,8 +28,13 @@ public class ExerciseController {
     }
 
     @Post("/exercises")
-    HttpResponse<ExerciseDto> save(final HttpRequest<ExerciseDto> exercise) {
-        final Exercise savedExercise = exerciseRepository.save(new Exercise(exercise.getBody().get()));
-        return HttpResponse.created(savedExercise.asDto(), exercise.getUri());
+    HttpResponse<?> save(final HttpRequest<ExerciseDto> exercise) {
+        return exercise.getBody()
+            .map(Exercise::fromDto)
+            .map(Exercise.Builder::build)
+            .map(exerciseRepository::save)
+            .map(Exercise::asDto)
+            .map(saved -> HttpResponse.created(saved, exercise.getUri()))
+            .orElseGet(HttpResponse::badRequest);
     }
 }
