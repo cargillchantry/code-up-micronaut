@@ -1,5 +1,6 @@
 package code.up.exercise;
 
+import code.up.http.UriToAbsoluteServiceUriResolver;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
@@ -11,10 +12,15 @@ import java.util.stream.Collectors;
 
 @Controller
 public class ExerciseController {
+    private final UriToAbsoluteServiceUriResolver uriResolver;
     private final ExerciseRepository exerciseRepository;
 
     @Inject
-    public ExerciseController(final ExerciseRepository exerciseRepository) {
+    public ExerciseController(
+        final UriToAbsoluteServiceUriResolver uriToAbsoluteServiceUriResolver,
+        final ExerciseRepository exerciseRepository
+    ) {
+        this.uriResolver = uriToAbsoluteServiceUriResolver;
         this.exerciseRepository = exerciseRepository;
     }
 
@@ -34,7 +40,7 @@ public class ExerciseController {
             .map(Exercise.Builder::build)
             .map(exerciseRepository::save)
             .map(Exercise::asDto)
-            .map(saved -> HttpResponse.created(saved, exercise.getUri()))
+            .map(saved -> HttpResponse.created(saved, uriResolver.derive(exercise.getUri())))
             .orElseGet(HttpResponse::badRequest);
     }
 }

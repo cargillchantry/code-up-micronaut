@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @MicronautTest
-class PingControllerTest {
+class PingControllerIntegrationTest {
     @Client("/")
     @Inject
     RxHttpClient httpClient;
