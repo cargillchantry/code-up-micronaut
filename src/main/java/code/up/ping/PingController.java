@@ -10,6 +10,6 @@ public class PingController {
         if(ping.toLowerCase().equals("ping")) {
             return "pong";
         }
-        return "WRONG GAME!";
+        return "what";
     }
 }

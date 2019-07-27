@@ -6,6 +6,7 @@ import io.micronaut.test.annotation.MicronautTest;
 import org.junit.jupiter.api.Test;
 import javax.inject.Inject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @MicronautTest
 class PingControllerIntegrationTest {
@@ -22,8 +23,7 @@ class PingControllerIntegrationTest {
 
     @Test
     void shouldComplainIfUserDoesNotVisitPing() {
-        final String result = httpClient.retrieve("/pang").blockingFirst();
-
-        assertEquals("WRONG GAME!", result);
+        // help me code up!
+        assertFalse(true);
     }
 }
