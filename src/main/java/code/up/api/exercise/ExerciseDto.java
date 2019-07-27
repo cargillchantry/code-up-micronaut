@@ -1,4 +1,4 @@
-package code.up.exercise;
+package code.up.api.exercise;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

@@ -1,4 +1,4 @@
-package code.up.exercise;
+package code.up.api.exercise;
 
 enum ExerciseType {
     HIKE, RUN, SWIM, BIKE, ROW

@@ -1,4 +1,4 @@
-package code.up.exercise;
+package code.up.api.exercise;
 
 import java.time.Duration;
 
@@ -11,10 +11,6 @@ class Exercise {
         this.id = builder.id;
         this.exerciseType = builder.exerciseType;
         this.duration = builder.duration;
-    }
-
-    ExerciseDto asDto() {
-        return new ExerciseDto(exerciseType, duration);
     }
 
     String getId() {

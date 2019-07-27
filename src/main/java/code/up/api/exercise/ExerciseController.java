@@ -1,4 +1,4 @@
-package code.up.exercise;
+package code.up.api.exercise;
 
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Controller;
@@ -7,8 +7,6 @@ import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
 import javax.inject.Inject;
 import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class ExerciseController {
@@ -20,22 +18,18 @@ public class ExerciseController {
     }
 
     @Get("/exercises")
-    List<ExerciseDto> findAll() {
-        return exerciseRepository
-            .findAll()
-            .stream()
-            .map(Exercise::asDto)
-            .collect(Collectors.toUnmodifiableList());
+    ExercisesResponseDto findAll() {
+        return new ExercisesResponseDto(exerciseRepository.findAll());
     }
 
     @Post("/exercises")
-    HttpResponse<ExerciseDto> create(final ExerciseDto exercise) {
+    HttpResponse<ExerciseResponseDto> create(final ExerciseDto exercise) {
         final Exercise savedExercise = exerciseRepository.save(Exercise.fromDto(exercise).build());
-        return HttpResponse.created(savedExercise.asDto(), exerciseSelfUri(savedExercise));
+        return HttpResponse.created(new ExerciseResponseDto(savedExercise), exerciseSelfUri(savedExercise));
     }
 
     @Put("/exercises/{uuid}")
-    ExerciseDto update(final ExerciseDto exerciseDto, final String uuid) {
+    ExerciseResponseDto update(final ExerciseDto exerciseDto, final String uuid) {
         // can someone help ?
         return null;
     }

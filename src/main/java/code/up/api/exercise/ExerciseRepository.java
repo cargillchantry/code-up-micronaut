@@ -1,4 +1,4 @@
-package code.up.exercise;
+package code.up.api.exercise;
 
 import javax.inject.Singleton;
 import java.util.HashMap;

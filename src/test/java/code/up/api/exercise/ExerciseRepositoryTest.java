@@ -1,14 +1,13 @@
-package code.up.exercise;
+package code.up.api.exercise;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.time.Duration;
 import java.util.List;
-import static code.up.exercise.ExerciseType.RUN;
+import static code.up.api.exercise.ExerciseType.RUN;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ExerciseRepositoryTest {
-
     private ExerciseRepository exerciseRepository;
 
     @BeforeEach
