@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.time.Duration;
 import java.util.List;
+import java.util.Optional;
+
 import static code.up.api.exercise.ExerciseType.RUN;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,10 +24,25 @@ class ExerciseRepositoryTest {
         // act
         exerciseRepository.save(exercise);
         // assert
-        final Exercise saved = exerciseRepository.findAll().get(0);
+        final List<Exercise> exercises = exerciseRepository.findAll();
+        assertThat(exercises).hasSize(1);
+        final Exercise saved = exercises.get(0);
         assertThat(saved.getId()).isNotNull();
         assertThat(saved.getDuration()).isEqualTo(Duration.ofMillis(123));
         assertThat(saved.getExerciseType()).isEqualTo(RUN);
+    }
+
+    @Test
+    void shouldFindExercseById() {
+        // assemble
+        exerciseRepository.save(Exercise.builder().setId("1234").build());
+        exerciseRepository.save(Exercise.builder().setId("1235").build());
+        exerciseRepository.save(Exercise.builder().setId("1236").build());
+        // act
+        final Optional<Exercise> byId = exerciseRepository.findById("1235");
+        // assert
+        assertThat(byId).isNotEmpty();
+        assertThat(byId.get().getId()).isEqualTo("1235");
     }
 
     @Test
