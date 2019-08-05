@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @Singleton
@@ -24,6 +25,10 @@ class ExerciseRepository {
 
     List<Exercise> findAll() {
         return List.copyOf(exercises.values());
+    }
+
+    Optional<Exercise> findById(final String uuid) {
+        return Optional.ofNullable(exercises.get(uuid));
     }
 
     void deleteAll() {

@@ -22,6 +22,15 @@ public class ExerciseController {
         return new ExercisesResponseDto(exerciseRepository.findAll());
     }
 
+    @Get("/exercises/{uuid}")
+    HttpResponse<ExerciseResponseDto> find(final String uuid) {
+        return exerciseRepository
+            .findById(uuid)
+            .map(ExerciseResponseDto::new)
+            .map(HttpResponse::ok)
+            .orElseGet(HttpResponse::badRequest);
+    }
+
     @Post("/exercises")
     HttpResponse<ExerciseResponseDto> create(final ExerciseDto exercise) {
         final Exercise savedExercise = exerciseRepository.save(Exercise.fromDto(exercise).build());
