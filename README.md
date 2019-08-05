@@ -10,6 +10,7 @@ Navigate to the directory you would like to which you would like to clone the pr
 
     git clone git@github.com:chantrybjss/code-up-micronaut.git
     
+For those of you without git installed. If you visit [the branch on github](https://github.com/chantrybjss/code-up-micronaut) there is a green button that says Clone or Download. Click this button if you do not want to clone using the above command.
 ### Install Java 11
 
 Amazon Corretto is a production-ready distribution of OpenJDK. Download and install from the AWS Documentation [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
